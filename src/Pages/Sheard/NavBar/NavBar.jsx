@@ -8,7 +8,7 @@ const NavBar = () => {
       <Link to="/contact" className="uppercase hover:text-amber-600">Contact Us</Link>
       <Link to="/dashboard" className="uppercase hover:text-amber-600">Dashboard</Link>
       <Link to="/menu" className="uppercase hover:text-amber-600">Our Menu</Link>
-      <Link to="/shop" className="uppercase hover:text-amber-600">Our Shop</Link>
+      <Link to="/order" className="uppercase hover:text-amber-600">Our Shop</Link>
       <Link to="/logout" className="uppercase hover:text-amber-600">Sign Out</Link>
     </>
   );
