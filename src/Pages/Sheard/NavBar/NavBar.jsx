@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const NavBar = () => {
+  const {user, logOut} = useContext(AuthContext)
+  const loggedOut = () =>{
+    return logOut()
+    .then(result=>{
+      const user = result.user;
+      console.log(user)
+    })
+  }
   const navOption = (
     <>
       <Link to="/" className="uppercase hover:text-amber-600">Home</Link>
@@ -9,7 +18,14 @@ const NavBar = () => {
       <Link to="/dashboard" className="uppercase hover:text-amber-600">Dashboard</Link>
       <Link to="/menu" className="uppercase hover:text-amber-600">Our Menu</Link>
       <Link to="/order" className="uppercase hover:text-amber-600">Our Shop</Link>
-      <Link to="/logout" className="uppercase hover:text-amber-600">Sign Out</Link>
+     
+      {
+        user ? <>
+          <button onClick={loggedOut}  className="uppercase hover:text-amber-600">Log out</button>
+        </> : <>
+         <Link to="/login" className="uppercase hover:text-amber-600">Log in</Link>
+        </> 
+      }
     </>
   );
 

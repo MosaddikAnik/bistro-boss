@@ -6,6 +6,10 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Order/Order";
+import Login from "../Pages/Login/Login";
+import SignIn from "../Pages/SignIn/SignIn";
+import PrivateRoute from "./PrivateRoute";
+import Secret from "../Pages/Sheard/Secret/Secret";
 
 
 export const router = createBrowserRouter([
@@ -24,6 +28,18 @@ export const router = createBrowserRouter([
       {
         path: "order",
         element: <Order></Order>
+      },
+      {
+        path: "login",
+        element: <Login></Login>
+      },
+      {
+        path: "signIn",
+        element: <SignIn></SignIn>
+      },
+      {
+        path: "secret",
+        element: <PrivateRoute><Secret></Secret></PrivateRoute>
       }
     ]
   },
