@@ -1,31 +1,60 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../Hooks/useCart";
 
 const NavBar = () => {
-  const {user, logOut} = useContext(AuthContext)
-  const loggedOut = () =>{
-    return logOut()
-    .then(result=>{
+  const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart()
+  const loggedOut = () => {
+    return logOut().then((result) => {
       const user = result.user;
-      console.log(user)
-    })
-  }
+      console.log(user);
+    });
+  };
   const navOption = (
     <>
-      <Link to="/" className="uppercase hover:text-amber-600">Home</Link>
-      <Link to="/contact" className="uppercase hover:text-amber-600">Contact Us</Link>
-      <Link to="/dashboard" className="uppercase hover:text-amber-600">Dashboard</Link>
-      <Link to="/menu" className="uppercase hover:text-amber-600">Our Menu</Link>
-      <Link to="/order" className="uppercase hover:text-amber-600">Our Shop</Link>
-     
-      {
-        user ? <>
-          <button onClick={loggedOut}  className="uppercase hover:text-amber-600">Log out</button>
-        </> : <>
-         <Link to="/login" className="uppercase hover:text-amber-600">Log in</Link>
-        </> 
-      }
+      <Link to="/" className="uppercase hover:text-amber-600">
+        Home
+      </Link>
+      <Link to="/contact" className="uppercase hover:text-amber-600">
+        Contact Us
+      </Link>
+      <Link to="/dashboard" className="uppercase hover:text-amber-600">
+        Dashboard
+      </Link>
+      <Link to="/menu" className="uppercase hover:text-amber-600">
+        Our Menu
+      </Link>
+      <Link to="/order" className="uppercase hover:text-amber-600">
+        Our Shop
+      </Link>
+      <Link to="/dashboard/cart">
+        <div className="flex items-center gap-2">
+          <FaShoppingCart className="h-5 w-5" />
+          <div className="badge badge-sm badge-secondary">
+            {cart?.length || 0}
+          </div>
+        </div>
+      </Link>
+
+      {user ? (
+        <>
+          <button
+            onClick={loggedOut}
+            className="uppercase hover:text-amber-600"
+          >
+            Log out
+          </button>
+        </>
+      ) : (
+        <>
+          <Link to="/login" className="uppercase hover:text-amber-600">
+            Log in
+          </Link>
+        </>
+      )}
     </>
   );
 
@@ -42,7 +71,12 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
             </svg>
           </div>
           <ul
@@ -61,9 +95,7 @@ const NavBar = () => {
 
       {/* Desktop Menu */}
       <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal gap-x-3">
-          {navOption}
-        </ul>
+        <ul className="menu menu-horizontal gap-x-3">{navOption}</ul>
       </div>
     </div>
   );

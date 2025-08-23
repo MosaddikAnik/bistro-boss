@@ -13,6 +13,7 @@ const Login = () => {
 
   // if redirected from a protected route, fallback to "/"
   const from = location.state?.from?.pathname || "/";
+  console.log(location.state)
 
   const handleLogin = (event) => {
     event.preventDefault();
